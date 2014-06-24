@@ -1,12 +1,16 @@
 package demo;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -39,6 +43,7 @@ public class RedisDao {
     
     public List<Map<Long, Map<Object, Object>>> getSomethingWithRedis()
     {
+    	List<Map<Long, Map<Object, Object>>> list = new ArrayList<>();
 //    	long key1 = now.getTime() ;
 //    	long key2 = now.getTime() - 60000 ;
     	
@@ -47,12 +52,19 @@ public class RedisDao {
     	
     	Set<String> allKeys = redisTemplate.keys("*") ;
     	
+    	if (allKeys.isEmpty())
+    	{
+    		return list ;
+    	}
+    	
+    	SortedSet<String> sorted = new TreeSet<>(allKeys) ;
+    	String[] arr = sorted.toArray(new String[]{}) ;
     	
     	//Set<String> allKeys = redisTemplate.randomKey() ;
     	//Object obj1 = redisTemplate.opsForHash().keys(Long.toString(key1));
     	//Object obj2 = redisTemplate.opsForHash().keys(Long.toString(key2));
     	
-    	List<Map<Long, Map<Object, Object>>> list = new ArrayList<>();
+    	//List<Map<Long, Map<Object, Object>>> list = new ArrayList<>();
     	//Map<Long, Map<Object, Object>> y = new HashMap<>() ;
 
 //    	for (int i = 0 ; i < 5 ; i++)
@@ -62,16 +74,22 @@ public class RedisDao {
 //    		
 //    	}
 
-    	int counter = 0 ;
-    	for (String key : allKeys)
+//    	int counter = 0 ;
+//    	for (String key : allKeys)
+//    	{
+//    		Map<Long, Map<Object, Object>> y = new HashMap<>() ;
+//        	y.put(Long.parseLong(key), redisTemplate.opsForHash().entries(key)) ;
+//        	list.add(y) ;
+//        	counter ++ ;
+//        	if (counter > 5) break ;
+//    	}
+
+    	for (int i = 0 ; i<5 ; i++)
     	{
     		Map<Long, Map<Object, Object>> y = new HashMap<>() ;
-        	y.put(Long.parseLong(key), redisTemplate.opsForHash().entries(key)) ;
+        	y.put(Long.parseLong(arr[i]), redisTemplate.opsForHash().entries(arr[i])) ;
         	list.add(y) ;
-        	counter ++ ;
-        	if (counter > 5) break ;
     	}
-
 //    	y.put(key1, redisTemplate.opsForHash().entries(Long.toString(key1))) ;
 //    	y.put(key2, redisTemplate.opsForHash().entries(Long.toString(key2))) ;
     	
