@@ -36,12 +36,14 @@ public class TweetsController extends SocialController {
 	
 	@RequestMapping("/lastTweets/minutes/{numberOfMinutesBackward}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String countTweets(
+	public Object countTweets(
 			@PathParam("numberOfMinutesBackward")
 			Integer numberOfMinutesBackward) {
-		int dummy = tweetCountService.countTweets() ;
-		System.out.println(dummy);
-		String response = "[{\"9:54:00\":{\"tweets\":{\"#abc\":59,\"#WWW\":51,\"#swd\":49,\"#qas\":39,\"#def\":7}}},{\"9:53:00\":{\"tweets\":{\"#abc\":59,\"#WWW\":51,\"#swd\":39,\"#qas\":29,\"#def\":7}}},{\"9:52\":{\"tweets\":{\"#abc\":59,\"#WWW\":51,\"#swd\":49,\"#qas\":39,\"#def\":7}}},{\"9:51\":{\"tweets\":{\"#abc\":59,\"#WWW\":51,\"#swd\":49,\"#qas\":39,\"#def\":7}}}]" ;				
+		//Object dummy = tweetCountService.countTweets() ;
+//		System.out.println(dummy);
+//		return dummy ;
+		String response = //"[{\"9:54:00\":{\"tweets\":{\"#abc\":59,\"#WWW\":51,\"#swd\":49,\"#qas\":39,\"#def\":7}}},{\"9:53:00\":{\"tweets\":{\"#abc\":59,\"#WWW\":51,\"#swd\":39,\"#qas\":29,\"#def\":7}}},{\"9:52\":{\"tweets\":{\"#abc\":59,\"#WWW\":51,\"#swd\":49,\"#qas\":39,\"#def\":7}}},{\"9:51\":{\"tweets\":{\"#abc\":59,\"#WWW\":51,\"#swd\":49,\"#qas\":39,\"#def\":7}}}]" ;
+		"[{\"1403608360901\":{\"#def\":5,\"#abc\":53}},{\"1403608300901\":{\"#def\":5,\"#abc\":53}},{\"1403608240901\":{\"#def\":5,\"#abc\":53}},{\"1403608360901\":{\"#def\":5,\"#abc\":53}}]" ;
 		return response ;
 	}
 

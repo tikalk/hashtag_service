@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class TweetCountService {
 
-//	@Autowired
-//	RedisDao redisDao ;
+	@Autowired
+	RedisDao redisDao ;
 	
-	public int countTweets()
+	public Object countTweets()
 	{
-		return 3 ;
+		redisDao.putDummyData() ;
+		Object obj = redisDao.getSomethingWithRedis() ;
+		return obj ;
 	}
 }
