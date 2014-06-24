@@ -14,7 +14,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-@ImportResource("applicationContextEvyatar.xml")
+@ImportResource("classpath:applicationContextEvyatar.xml")
 public class Application {
 
 	
