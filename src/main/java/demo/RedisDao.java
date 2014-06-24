@@ -37,7 +37,7 @@ public class RedisDao {
 //    	return 0 ;
 //    }
     
-    public Map<Long, Map<Object, Object>> getSomethingWithRedis()
+    public List<Map<Long, Map<Object, Object>>> getSomethingWithRedis()
     {
 //    	long key1 = now.getTime() ;
 //    	long key2 = now.getTime() - 60000 ;
@@ -52,7 +52,8 @@ public class RedisDao {
     	//Object obj1 = redisTemplate.opsForHash().keys(Long.toString(key1));
     	//Object obj2 = redisTemplate.opsForHash().keys(Long.toString(key2));
     	
-    	Map<Long, Map<Object, Object>> y = new HashMap<>() ;
+    	List<Map<Long, Map<Object, Object>>> list = new ArrayList<>();
+    	//Map<Long, Map<Object, Object>> y = new HashMap<>() ;
 
 //    	for (int i = 0 ; i < 5 ; i++)
 //    	{
@@ -64,7 +65,9 @@ public class RedisDao {
     	int counter = 0 ;
     	for (String key : allKeys)
     	{
+    		Map<Long, Map<Object, Object>> y = new HashMap<>() ;
         	y.put(Long.parseLong(key), redisTemplate.opsForHash().entries(key)) ;
+        	list.add(y) ;
         	counter ++ ;
         	if (counter > 5) break ;
     	}
@@ -72,6 +75,6 @@ public class RedisDao {
 //    	y.put(key1, redisTemplate.opsForHash().entries(Long.toString(key1))) ;
 //    	y.put(key2, redisTemplate.opsForHash().entries(Long.toString(key2))) ;
     	
-    	return y ;
+    	return list;
     }
 }
