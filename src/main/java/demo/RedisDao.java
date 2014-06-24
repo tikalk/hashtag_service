@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +88,10 @@ public class RedisDao {
     	for (int i = 0 ; i<5 ; i++)
     	{
     		Map<Long, Map<Object, Object>> y = new HashMap<>() ;
-        	y.put(Long.parseLong(arr[i]), redisTemplate.opsForHash().entries(arr[i])) ;
+    		Map<Object, Object> entries = redisTemplate.opsForHash().entries(arr[i]) ;
+    		//SortedSet<Object> sortedHashtags = new TreeSet<>(entries.keySet()) ;
+    		Map<Object, Object> entriesSortedByKey = new TreeMap<>(entries) ;
+        	y.put(Long.parseLong(arr[i]), entriesSortedByKey) ;
         	list.add(y) ;
     	}
 //    	y.put(key1, redisTemplate.opsForHash().entries(Long.toString(key1))) ;
