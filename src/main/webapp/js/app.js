@@ -19,7 +19,8 @@ module.directive('chart', ['tikalFusedayTweets', 'chartService', '$interval',
 
                 function init() {
                     tikalFusedayTweets
-                        .getTweetsByMinutes(5)
+                        //.getTweetsByMinutes(5)
+                        .getTweetsBySecounds(5)
                         .then(function(response) {
                             var chartServiceParams = [response.data];
                             if (chartService['draw' + scope.type]) {
@@ -51,8 +52,10 @@ module.service('tikalFusedayTweets', ['$http',
                 //return $http.get('data.json');
             },
 
-            getTweetsBySecounds: function(secounds) {
-
+            getTweetsBySecounds: function(seconds) {
+            	var url = 'http://localhost:8080/lastTweets/seconds/' + seconds;// + '?callback=JSON_CALLBACK';
+                
+                return $http.get(url);
             }
         };
     }
@@ -151,7 +154,8 @@ module.service('chartService', [
                         d = new Date(ms);
                     return [
                         d.getHours(),
-                        d.getMinutes()
+                        d.getMinutes(),
+                        d.getSeconds()
                     ].join(':');
                 }
 
