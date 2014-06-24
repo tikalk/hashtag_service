@@ -47,6 +47,9 @@ public class TweetsController extends SocialController {
 		return response ;
 	}
 
+	
+	
+	
 	@RequestMapping("/lastTweets/minutes/{numberOfMinutesBackward}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object countTweets(
