@@ -11,7 +11,7 @@ public class TweetCountService {
 	
 	public Object countTweets()
 	{
-		redisDao.putDummyData() ;
+		//redisDao.putDummyData() ;
 		Object obj = redisDao.getSomethingWithRedis() ;
 		return obj ;
 	}
