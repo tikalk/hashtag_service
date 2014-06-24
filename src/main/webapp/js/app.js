@@ -28,7 +28,8 @@ module.directive('chart', ['tikalFusedayTweets', 'chartService', '$interval',
                         })
                         .error(function(data) {
                             debugger;
-                        });
+                        })
+                        ;
                 }
                 init();
                 $interval(init, 1000 * 10, false);
@@ -43,9 +44,10 @@ module.service('tikalFusedayTweets', ['$http',
 
         return {
             getTweetsByMinutes: function(minutes) {
-                var url = 'http://localhost:8080/lastTweets/minutes/' + minutes + '?callback=JSON_CALLBACK';
-
-                return $http.jsonp(url);
+                var url = 'http://localhost:8080/lastTweets/minutes/' + minutes;// + '?callback=JSON_CALLBACK';
+                
+                return $http.get(url);
+                //return $http.jsonp(url);
                 //return $http.get('data.json');
             },
 
