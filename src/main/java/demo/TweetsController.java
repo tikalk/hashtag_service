@@ -62,20 +62,10 @@ public class TweetsController extends SocialController {
 	
 	@RequestMapping("/lastTweets/seconds/{numberOfSecondsBackward}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Map<Long, Map<String, Integer>>> countTweets2(
+	public Object countTweets2(
 			@PathParam("numberOfSecondsBackward")
 			Integer numberOfSecondsBackward) {
-		Map<String, Integer> x = new HashMap<>() ;
-		x.put("#abc", 53);
-		x.put("#def", 5);
-		Map<Long, Map<String, Integer>> y = new HashMap<>() ;
-		y.put((new Date()).getTime(), x) ;
-		List<Map<Long, Map<String, Integer>>> ret = new ArrayList<>() ;
-		ret.add(y) ;
-		ret.add(y) ;
-		ret.add(y) ;
-		ret.add(y) ;
-		return ret ;
+		return tweetCountService.countTweets() ;
 	}
 
 }
