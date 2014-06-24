@@ -34,9 +34,9 @@ public class TweetsController extends SocialController {
 //		return response ;
 //	}
 	
-	@RequestMapping("/lastTweets/minutes/{numberOfMinutesBackward}")
+	@RequestMapping("/lastTweets/minutes/hardcoded/{numberOfMinutesBackward}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Object countTweets(
+	public Object countTweetsH(
 			@PathParam("numberOfMinutesBackward")
 			Integer numberOfMinutesBackward) {
 		//Object dummy = tweetCountService.countTweets() ;
@@ -47,6 +47,15 @@ public class TweetsController extends SocialController {
 		return response ;
 	}
 
+	@RequestMapping("/lastTweets/minutes/{numberOfMinutesBackward}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object countTweets(
+			@PathParam("numberOfMinutesBackward")
+			Integer numberOfMinutesBackward) {
+		Object theMap = tweetCountService.countTweets() ;
+//		System.out.println(dummy);
+		return theMap ;
+	}
 	
 	@RequestMapping("/lastTweets/seconds/{numberOfSecondsBackward}")
 	@Produces(MediaType.APPLICATION_JSON)
